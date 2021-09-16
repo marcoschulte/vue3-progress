@@ -5,7 +5,7 @@
   "author": "Marco Schulte",
   "license": "MIT",
   "scripts": {
-    "dev": "watch 'yarn build && rsync -a --exclude=node_modules . ../bh-vermietersystem/app/node_modules/vue3-progress' src",
+    "dev": "watch 'yarn build && rsync -a --exclude=node_modules --delete . ../bh-vermietersystem/app/node_modules/vue3-progress' src",
     "build": "rollup -c"
   },
   "main": "dist/index.js",
