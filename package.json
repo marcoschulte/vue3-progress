@@ -1,0 +1,34 @@
+{
+  "name": "vue3-progress",
+  "description": "",
+  "version": "0.0.1",
+  "author": "Marco Schulte",
+  "license": "MIT",
+  "scripts": {
+    "dev": "watch 'yarn build && rsync -a --exclude=node_modules . ../bh-vermietersystem/app/node_modules/vue3-progress' src",
+    "build": "rollup -c"
+  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "vue",
+    "vue 3",
+    "vue3",
+    "progress",
+    "bar",
+    "progress bar",
+    "loading",
+    "loading bar",
+    "loading animation"
+  ],
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.8",
+    "rollup": "^2.56.3",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-vue": "^6.0.0",
+    "typescript": "^4.3.2",
+    "vue": "3.2.4",
+    "watch": "^1.0.2"
+  }
+}
