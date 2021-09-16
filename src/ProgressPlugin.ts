@@ -1,4 +1,5 @@
 import {App, Plugin, reactive} from 'vue';
+import {holder} from './GlobalInstanceHolder';
 import {injectionKey} from './Injector';
 import ProgressBar from './ProgressBar.vue';
 import {ProgressControls, ProgressFinisher} from './ProgressControls';
@@ -6,14 +7,14 @@ import {ProgressState} from './ProgressState';
 
 
 export interface ProgressOptions {
+  disableGlobalInstance: boolean;
 }
 
 const state = reactive({
   active: false,
 } as ProgressState);
 
-
-const createPlugin = (options?: ProgressOptions): ProgressControls => {
+const createPlugin = (): ProgressControls => {
   const internalState = {inflight: 0};
   const updateActive = () => {
     state.active = internalState.inflight > 0;
@@ -54,9 +55,13 @@ const createPlugin = (options?: ProgressOptions): ProgressControls => {
 
 export const Vue3ProgressPlugin: Plugin = {
   install: (app: App, options?: ProgressOptions) => {
-    const instance = createPlugin(options);
+    const instance = createPlugin();
+
     app.provide(injectionKey, instance);
     app.config.globalProperties.$progress = instance;
+    if (!options || !options.disableGlobalInstance) {
+      holder.instance = instance;
+    }
     app.component('Vue3ProgressBar', ProgressBar);
   },
 };

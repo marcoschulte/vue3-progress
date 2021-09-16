@@ -1,4 +1,5 @@
 import {inject, InjectionKey} from 'vue';
+import {holder} from './GlobalInstanceHolder';
 import {ProgressControls} from './ProgressControls';
 
 export const injectionKey: InjectionKey<ProgressControls> = Symbol(
@@ -6,5 +7,5 @@ export const injectionKey: InjectionKey<ProgressControls> = Symbol(
 );
 
 export const useProgress = (): ProgressControls => {
-  return inject(injectionKey) as ProgressControls;
+  return holder.instance || inject(injectionKey) as ProgressControls;
 };
