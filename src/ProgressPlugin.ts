@@ -1,7 +1,7 @@
 import {App, Plugin, reactive} from 'vue';
 import {injectionKey} from './Injector';
 import ProgressBar from './ProgressBar.vue';
-import {ProgressControls, ProgressEnder} from './ProgressControls';
+import {ProgressControls, ProgressFinisher} from './ProgressControls';
 import {ProgressState} from './ProgressState';
 
 
@@ -19,11 +19,11 @@ const createPlugin = (options?: ProgressOptions): ProgressControls => {
     state.active = internalState.inflight > 0;
   };
 
-  const createEnder = (enderState: { used: boolean }) => {
+  const createFinisher = (finishState: { used: boolean }) => {
     return {
-      end: () => {
-        if (!enderState.used) {
-          enderState.used = true;
+      finish: () => {
+        if (!finishState.used) {
+          finishState.used = true;
           internalState.inflight--;
           updateActive();
         }
@@ -32,13 +32,20 @@ const createPlugin = (options?: ProgressOptions): ProgressControls => {
   };
 
   return {
-    start(): ProgressEnder {
+    start(): ProgressFinisher {
       state.active = true;
       internalState.inflight++;
       updateActive();
 
-      return createEnder({used: false});
+      return createFinisher({used: false});
     },
+
+    wrap(promise) {
+      const finisher = this.start();
+      promise.then(() => finisher.finish(), () => finisher.finish());
+      return promise;
+    },
+
     state(): ProgressState {
       return state;
     },
@@ -49,7 +56,13 @@ export const Vue3ProgressPlugin: Plugin = {
   install: (app: App, options?: ProgressOptions) => {
     const instance = createPlugin(options);
     app.provide(injectionKey, instance);
-
+    app.config.globalProperties.$progress = instance;
     app.component('Vue3ProgressBar', ProgressBar);
   },
 };
+
+declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    $progress: ProgressControls;
+  }
+}

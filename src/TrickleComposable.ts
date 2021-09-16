@@ -25,6 +25,7 @@ export default function trickleComposable(state: ProgressState) {
 
     } else {
       value.value = 100;
+      intervalHolder.interval = setInterval(() => value.value = 0, 500);
     }
   };
 

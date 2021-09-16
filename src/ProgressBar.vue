@@ -32,6 +32,7 @@ export default defineComponent({
 <style lang="scss">
 $vue3-progress-bar-container-z-index: 999999 !default;
 $vue3-progress-bar-container-transition: all 500ms ease !default;
+
 $vue3-progress-bar-color: #42b983 !default;
 $vue3-progress-bar-height: 2px !default;
 $vue3-progress-bar-transition: all 200ms ease !default;
