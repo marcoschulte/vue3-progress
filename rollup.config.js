@@ -1,5 +1,7 @@
 import typescript from 'rollup-plugin-typescript2';
 import vue from 'rollup-plugin-vue';
+import scss from 'rollup-plugin-scss';
+import bundleScss from 'rollup-plugin-bundle-scss';
 
 export default async function config(args) {
   return {
@@ -12,6 +14,13 @@ export default async function config(args) {
     },
     plugins: [
       vue(),
+      bundleScss({
+        exclusive: false,
+      }),
+      scss({
+        output: 'dist/index.css',
+        outputStyle: 'compressed',
+      }),
       typescript({
         tsconfigOverride: {
           compilerOptions: {
