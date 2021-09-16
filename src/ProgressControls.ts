@@ -1,9 +1,11 @@
 import {ProgressState} from './ProgressState';
 
 export interface ProgressControls {
-  start(): void;
-
-  end(): void;
+  start(): ProgressEnder;
 
   state(): ProgressState;
+}
+
+export interface ProgressEnder {
+  end(): void;
 }

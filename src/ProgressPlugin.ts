@@ -1,7 +1,7 @@
 import {App, Plugin, reactive} from 'vue';
 import {injectionKey} from './Injector';
 import ProgressBar from './ProgressBar.vue';
-import {ProgressControls} from './ProgressControls';
+import {ProgressControls, ProgressEnder} from './ProgressControls';
 import {ProgressState} from './ProgressState';
 
 
@@ -14,16 +14,30 @@ const state = reactive({
 
 
 const createPlugin = (options?: ProgressOptions): ProgressControls => {
-  console.log('Creating instance with options', options);
+  const internalState = {inflight: 0};
+  const updateActive = () => {
+    state.active = internalState.inflight > 0;
+  };
+
+  const createEnder = (enderState: { used: boolean }) => {
+    return {
+      end: () => {
+        if (!enderState.used) {
+          enderState.used = true;
+          internalState.inflight--;
+          updateActive();
+        }
+      },
+    };
+  };
 
   return {
-    start: () => {
-      console.log('Start');
+    start(): ProgressEnder {
       state.active = true;
-    },
-    end() {
-      console.log('End');
-      state.active = false;
+      internalState.inflight++;
+      updateActive();
+
+      return createEnder({used: false});
     },
     state(): ProgressState {
       return state;
