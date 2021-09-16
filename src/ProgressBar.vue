@@ -7,73 +7,22 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {useProgress} from './Injector';
+import trickleComposable from './TrickleComposable';
 
 export default defineComponent({
   name: 'Vue3ProgressBar',
 
   setup: () => {
     const state = useProgress().state();
-    return {state};
-  },
-
-  data() {
-    return {
-      value: 0,
-      interval: null as any,
-    };
+    const {value} = trickleComposable(state);
+    return {state, value};
   },
 
   computed: {
-    isActive() {
-      return this.state.active;
-    },
     style() {
       return {
         transform: `translate3d(${this.value - 100}%,0,0)`,
       };
-    },
-  },
-
-  watch: {
-    isActive() {
-      this.stateChanged();
-    },
-  },
-
-  mounted() {
-    if (this.state.active) {
-      this.stateChanged();
-    }
-  },
-
-  methods: {
-    stateChanged() {
-      if (this.interval) {
-        clearInterval(this.interval);
-        this.interval = null;
-      }
-
-      if (this.state.active) {
-        this.value = 0;
-        this.interval = setInterval(() => {
-          this.value = Math.min(this.value + this.trickleAmount(this.value), 100);
-        }, 300);
-
-      } else {
-        this.value = 100;
-      }
-    },
-    trickleAmount: (n: number): number => {
-      if (n < 20) {
-        return 10;
-      } else if (n < 50) {
-        return 4;
-      } else if (n < 80) {
-        return 2;
-      } else if (n < 99) {
-        return 0.5;
-      }
-      return 0;
     },
   },
 
