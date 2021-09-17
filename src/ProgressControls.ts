@@ -3,7 +3,7 @@ import {ProgressState} from './ProgressState';
 export interface ProgressControls {
   start(): ProgressFinisher;
 
-  wrap<V, T extends PromiseLike<V>>(promise: T): T;
+  attach<V, T extends PromiseLike<V>>(promise: T): T;
 
   state(): ProgressState;
 }

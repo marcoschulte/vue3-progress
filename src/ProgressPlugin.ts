@@ -41,7 +41,7 @@ const createPlugin = (): ProgressControls => {
       return createFinisher({used: false});
     },
 
-    wrap(promise) {
+    attach(promise) {
       const finisher = this.start();
       promise.then(() => finisher.finish(), () => finisher.finish());
       return promise;

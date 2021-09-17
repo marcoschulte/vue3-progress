@@ -1,11 +1,12 @@
 {
-  "name": "vue3-progress",
-  "description": "",
-  "version": "0.0.1",
+  "name": "@marcoschulte/vue3-progress",
+  "description": "A fully customizable vue3 plugin to display a progress bar while waiting for something, e.g. http requests",
+  "version": "0.0.3",
   "author": "Marco Schulte",
-  "license": "MIT",
+  "license": "ISC",
+  "repository": "https://github.com/marcoschulte/vue3-progress",
   "scripts": {
-    "dev": "watch 'yarn build && rsync -a --exclude=node_modules --delete . ../bh-vermietersystem/app/node_modules/vue3-progress' src",
+    "dev": "watch 'yarn build && rsync -a --exclude=node_modules --delete . ../bh-vermietersystem/app/node_modules/@marcoschulte/vue3-progress' src",
     "build": "rollup -c"
   },
   "main": "dist/index.js",
