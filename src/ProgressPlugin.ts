@@ -34,7 +34,6 @@ const createPlugin = (): ProgressControls => {
 
   return {
     start(): ProgressFinisher {
-      state.active = true;
       internalState.inflight++;
       updateActive();
 
