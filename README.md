@@ -2,6 +2,10 @@
 
 A vue3 plugin to show a progress bar while waiting for something.
 
+# Demo
+
+Find a demo at [https://vue3-progress-demo.netlify.app/](https://vue3-progress-demo.netlify.app/).
+
 # Setup
 
     npm install @marcoschulte/vue3-progress
