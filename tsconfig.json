@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -30,6 +31,8 @@
     "src/**/*.vue"
   ],
   "exclude": [
+    "demo/**",
+    "tests/**",
     "**/node_modules",
     "**/dist",
     "**/vue-3"

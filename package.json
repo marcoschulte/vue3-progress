@@ -1,7 +1,7 @@
 {
   "name": "@marcoschulte/vue3-progress",
   "description": "A fully customizable vue3 plugin to display a progress bar while waiting for something, e.g. http requests",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Marco Schulte",
   "license": "ISC",
   "repository": "https://github.com/marcoschulte/vue3-progress",
