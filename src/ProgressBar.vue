@@ -38,7 +38,7 @@ $vue3-progress-bar-height: 2px !default;
 $vue3-progress-bar-transition: all 200ms ease !default;
 
 .vue3-progress-bar-container {
-  position: relative;
+  position: fixed;
   z-index: $vue3-progress-bar-container-z-index;
   top: 0;
   left: 0;
