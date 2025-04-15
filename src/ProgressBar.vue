@@ -30,21 +30,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-$vue3-progress-bar-container-z-index: 999999 !default;
-$vue3-progress-bar-container-transition: all 500ms ease !default;
-
-$vue3-progress-bar-color: #42b983 !default;
-$vue3-progress-bar-height: 2px !default;
-$vue3-progress-bar-transition: all 200ms ease !default;
+:root {
+  --vue3-progress-bar-container-z-index: 999999;
+  --vue3-progress-bar-container-transition: all 500ms ease;
+  --vue3-progress-bar-color: #42b983;
+  --vue3-progress-bar-height: 2px;
+  --vue3-progress-bar-transition: all 200ms ease;
+}
 
 .vue3-progress-bar-container {
   position: fixed;
-  z-index: $vue3-progress-bar-container-z-index;
+  z-index: var(--vue3-progress-bar-container-z-index);
   top: 0;
   left: 0;
   width: 100%;
   opacity: 0;
-  transition: $vue3-progress-bar-container-transition;
+  transition: var(--vue3-progress-bar-container-transition);
 
   &[active="true"] {
     opacity: 1;
@@ -53,10 +54,10 @@ $vue3-progress-bar-transition: all 200ms ease !default;
 
   .vue3-progress-bar {
     width: 100%;
-    height: $vue3-progress-bar-height;
+    height: var(--vue3-progress-bar-height);
     transform: translate3d(-100%, 0, 0);
-    background-color: $vue3-progress-bar-color;
-    transition: $vue3-progress-bar-transition;
+    background-color: var(--vue3-progress-bar-color);
+    transition: var(--vue3-progress-bar-transition);
   }
 }
 
