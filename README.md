@@ -26,9 +26,7 @@ createApp(App)
 Import style
 ```scss
 // in an .scss file
-@import "~@marcoschulte/vue3-progress/dist/";
-
-// alternatively the pre-compiled css can be imported from @marcoschulte/vue3-progress/dist/index.css
+@import "@marcoschulte/vue3-progress/style";
 ```
 
 Add progress bar component
@@ -118,8 +116,12 @@ axios.interceptors.response.use(resp => {
 Some scss variables are exposed which can be customized as follows. Check `ProgressBar.vue` for all variables. 
 
 ```scss
-$vue3-progress-bar-color: #ff0000;
-@import "~@marcoschulte/vue3-progress/dist/";
+@import "@marcoschulte/vue3-progress/style";
+
+:root {
+  --vue3-progress-bar-height: 4px;
+  --vue3-progress-bar-color: #ff0000;
+}
 ```
 
 Alternatively the css classes can be overriden in your own style.
